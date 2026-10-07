@@ -1,0 +1,21 @@
+{
+  "name": "json-path-viewer",
+  "version": "3.0.0",
+  "description": "Extensao de navegador que exibe JSON de forma legivel com busca por caminho (path) em qualquer profundidade.",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "build:firefox": "cross-env TARGET=firefox vite build",
+    "build:chrome": "cross-env TARGET=chrome vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit",
+    "package": "npm run build:chrome && npm run build:firefox && node scripts/package.mjs",
+    "package:source": "node scripts/package-source.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "7.0.3",
+    "typescript": "5.9.3",
+    "vite": "5.4.21"
+  }
+}

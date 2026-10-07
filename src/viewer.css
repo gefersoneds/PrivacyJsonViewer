@@ -1,0 +1,294 @@
+/* JSON Path Viewer - temas do IntelliJ IDEA
+ *
+ * Dois esquemas via variaveis CSS:
+ *   - Darcula (escuro, padrao)
+ *   - IntelliJ Light (claro, quando .jpv-container tem a classe .jpv-light)
+ *
+ * Paletas:
+ *   Escuro: fundos Darcula (editor #2B2B2B, UI #3C3F41); cores de texto ->
+ *           chave #B084EB (roxo/lilas), string #00CEC8 (azul-esverdeado),
+ *           numero #6897BB (azul), booleano/null #6A9955 (verde),
+ *           texto/brackets #D4D4D4
+ *   Light:  editor #FFFFFF, UI #F2F2F2, texto #080808, keyword #0033B3,
+ *           string #067D17, numero #1750EB, comentario #8C8C8C, selecao #A6D2FF
+ */
+
+/* As cores sao aplicadas via JS (themes.ts) como CSS custom properties no
+ * container. Os valores abaixo sao apenas FALLBACK (tema Darcula), usados caso
+ * o script ainda nao tenha aplicado o tema. */
+.jpv-container {
+  --jpv-editor-bg: #2b2b2b;
+  --jpv-ui-bg: #3c3f41;
+  --jpv-input-bg: #2b2b2b;
+  --jpv-text: #d4d4d4;
+  --jpv-key: #b084eb;
+  --jpv-string: #00cec8;
+  --jpv-number: #6897bb;
+  --jpv-boolean: #6a9955;
+  --jpv-null: #6a9955;
+  --jpv-punct: #d4d4d4;
+  --jpv-muted: #808080;
+  --jpv-border: #313335;
+  --jpv-input-border: #646464;
+  --jpv-btn-bg: #4c5052;
+  --jpv-btn-bg-hover: #5c6164;
+  --jpv-btn-border: #5e6060;
+  --jpv-accent: #4b6eaf;
+  --jpv-match: rgba(50, 89, 61, 0.55);
+  --jpv-match-active: #214283;
+  --jpv-match-active-text: #ffffff;
+}
+
+html.jpv-active,
+html.jpv-active body {
+  margin: 0;
+  padding: 0;
+}
+
+.jpv-container {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas,
+    "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--jpv-text);
+  background: var(--jpv-editor-bg);
+  min-height: 100vh;
+}
+
+/* ---------- Toolbar / busca ---------- */
+.jpv-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--jpv-ui-bg);
+  border-bottom: 1px solid var(--jpv-border);
+}
+
+.jpv-search-input {
+  flex: 1;
+  max-width: 520px;
+  padding: 6px 10px;
+  font: inherit;
+  color: var(--jpv-text);
+  background: var(--jpv-input-bg);
+  border: 1px solid var(--jpv-input-border);
+  border-radius: 4px;
+  outline: none;
+}
+
+.jpv-search-input::placeholder {
+  color: var(--jpv-muted);
+}
+
+.jpv-search-input:focus {
+  border-color: var(--jpv-accent);
+}
+
+.jpv-counter {
+  min-width: 56px;
+  text-align: center;
+  color: var(--jpv-muted);
+  font-size: 12px;
+}
+
+.jpv-btn {
+  padding: 5px 8px;
+  font: inherit;
+  color: var(--jpv-text);
+  background: var(--jpv-btn-bg);
+  border: 1px solid var(--jpv-btn-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.jpv-btn:hover {
+  background: var(--jpv-btn-bg-hover);
+}
+
+.jpv-btn-text {
+  font-size: 12px;
+}
+
+/* ---------- Arvore ---------- */
+.jpv-tree {
+  padding: 12px 16px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.jpv-row {
+  display: block;
+  padding-left: 0;
+  border-radius: 3px;
+}
+
+.jpv-children {
+  margin-left: 18px;
+  /* Linha-guia de indentacao: pontilhada (elegante), com a cor "muted" do tema
+   * levemente translucida para ficar visivel em escuro e claro. */
+  border-left: 1px dotted var(--jpv-guide, var(--jpv-muted));
+  padding-left: 6px;
+}
+
+.jpv-toggle {
+  display: inline-block;
+  width: 14px;
+  color: var(--jpv-muted);
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+}
+
+.jpv-toggle-empty {
+  cursor: default;
+}
+
+.jpv-key {
+  color: var(--jpv-key);
+}
+
+/* Chave de objeto/array: clicavel para expandir/recolher. */
+.jpv-key-toggle {
+  cursor: pointer;
+}
+
+/* Botao "expandir/recolher todos os filhos": discreto, so no hover da linha. */
+.jpv-bulk {
+  display: none;
+  margin-left: 8px;
+  padding: 0 4px;
+  font-size: 11px;
+  letter-spacing: -2px;
+  color: var(--jpv-muted);
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+}
+.jpv-row:hover > .jpv-bulk {
+  display: inline;
+}
+.jpv-bulk:hover {
+  color: var(--jpv-text);
+  background: var(--jpv-btn-bg);
+}
+
+.jpv-colon {
+  color: var(--jpv-punct);
+}
+
+.jpv-bracket {
+  color: var(--jpv-punct);
+}
+
+.jpv-preview {
+  color: var(--jpv-muted);
+  font-style: italic;
+  cursor: pointer;
+}
+
+.jpv-string {
+  color: var(--jpv-string);
+}
+
+.jpv-number {
+  color: var(--jpv-number);
+}
+
+.jpv-boolean {
+  color: var(--jpv-boolean);
+}
+
+.jpv-null {
+  color: var(--jpv-null);
+}
+
+/* ---------- Highlight de busca ---------- */
+.jpv-match {
+  background: var(--jpv-match);
+}
+
+.jpv-match-active {
+  background: var(--jpv-match-active);
+  color: var(--jpv-match-active-text);
+  outline: 1px solid var(--jpv-accent);
+}
+
+/* ---------- Tooltip de caminho (hover) ---------- */
+.jpv-path-tip {
+  position: fixed;
+  z-index: 50;
+  max-width: 70vw;
+  padding: 3px 8px;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--jpv-muted);
+  background: var(--jpv-ui-bg);
+  border: 1px solid var(--jpv-border);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+/* ---------- Seletor de tema + customizacao ---------- */
+.jpv-theme-wrap {
+  position: relative;
+  margin-left: auto;
+}
+
+.jpv-theme-select {
+  font: inherit;
+  font-size: 12px;
+  color: var(--jpv-text);
+  background: var(--jpv-btn-bg);
+  border: 1px solid var(--jpv-btn-border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+
+/* ---------- Minimapa ---------- */
+/* z-index abaixo da toolbar (z-index 10) para nao cobrir o seletor de tema.
+ * top/height sao definidos via JS (abaixo da toolbar). Bem transparente. */
+.jpv-minimap {
+  display: none;
+  position: fixed;
+  right: 0;
+  z-index: 5;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.15s ease;
+}
+.jpv-minimap:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Botao ativo (toggle) ---------- */
+.jpv-btn-active {
+  background: var(--jpv-accent);
+  color: #fff;
+  border-color: var(--jpv-accent);
+}
+
+/* ---------- Modo "mostrar tipos" ---------- */
+/* Quando ativo, anota o tipo de cada valor logo apos ele, de forma discreta. */
+.jpv-show-types .jpv-value::after {
+  content: " " attr(data-type);
+  margin-left: 6px;
+  padding: 0 5px;
+  font-size: 10px;
+  font-style: normal;
+  color: var(--jpv-muted);
+  border: 1px solid var(--jpv-border);
+  border-radius: 3px;
+  vertical-align: middle;
+}

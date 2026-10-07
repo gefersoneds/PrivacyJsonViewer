@@ -1,0 +1,119 @@
+{
+  "proposta": {
+    "id": 849302,
+    "protocolo": "PEF-PF-2026-0098471",
+    "status": "em_analise",
+    "valorSolicitado": 45000.0,
+    "prazoMeses": 48,
+    "taxaJurosAoMes": 1.89,
+    "aprovadaAutomaticamente": false,
+    "observacoes": null,
+    "dataCriacao": "2026-09-10T14:32:05-03:00",
+    "proponente": {
+      "nome": "Mariana de Oliveira Santos",
+      "cpf": "123.456.789-09",
+      "dataNascimento": "1988-04-17",
+      "rendaMensal": 9800.5,
+      "estadoCivil": "casada",
+      "possuiRestricao": false,
+      "scoreCredito": 782,
+      "endereco": {
+        "logradouro": "Rua das Acácias",
+        "numero": 1420,
+        "complemento": "Apto 72, Bloco B",
+        "bairro": "Jardim Primavera",
+        "cidade": "Londrina",
+        "uf": "PR",
+        "cep": "86050-120",
+        "coordenadas": {
+          "latitude": -23.310277,
+          "longitude": -51.162079
+        }
+      },
+      "telefone": [
+        {
+          "tipo": "celular",
+          "ddd": 43,
+          "numero": "99912-3456",
+          "whatsapp": true
+        },
+        {
+          "tipo": "residencial",
+          "ddd": 43,
+          "numero": "3322-1100",
+          "whatsapp": false
+        }
+      ],
+      "emails": [
+        "mariana.santos@email.com",
+        "mari.oliveira@trabalho.com.br"
+      ]
+    },
+    "avalistas": [
+      {
+        "nome": "Carlos Eduardo Santos",
+        "cpf": "987.654.321-00",
+        "parentesco": "conjuge",
+        "rendaMensal": 7200.0,
+        "scoreCredito": 715,
+        "endereco": {
+          "cidade": "Londrina",
+          "uf": "PR"
+        }
+      },
+      {
+        "nome": "Beatriz Oliveira Lima",
+        "cpf": "456.789.123-55",
+        "parentesco": "irma",
+        "rendaMensal": 5400.75,
+        "scoreCredito": 690,
+        "endereco": {
+          "cidade": "Maringá",
+          "uf": "PR"
+        }
+      }
+    ],
+    "garantias": [
+      {
+        "tipo": "veiculo",
+        "descricao": "Honda Civic EXL 2023",
+        "valorAvaliado": 142000.0,
+        "quitado": true
+      }
+    ],
+    "parcelas": [
+      {
+        "numero": 1,
+        "vencimento": "2026-10-10",
+        "valor": 1289.47,
+        "paga": false
+      },
+      {
+        "numero": 2,
+        "vencimento": "2026-11-10",
+        "valor": 1289.47,
+        "paga": false
+      }
+    ]
+  },
+  "regrasAplicadas": {
+    "cooperativa": "Sudoeste",
+    "motor": "PoliticaEmprestFinancPF",
+    "versao": "3.0.0",
+    "aprovacoes": {
+      "capacidadePagamento": true,
+      "comprometimentoRenda": 0.37,
+      "limiteCredito": 60000.0,
+      "grupoEconomico": {
+        "possui": true,
+        "quantidadeMembros": 3,
+        "exposicaoTotal": 128500.0
+      }
+    },
+    "alertas": [
+      "Comprometimento de renda acima de 35%",
+      "Proponente possui mais de um financiamento ativo"
+    ],
+    "pendencias": []
+  }
+}

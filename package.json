@@ -1,6 +1,6 @@
 {
   "name": "json-path-viewer",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Extensao de navegador que exibe JSON de forma legivel com busca por caminho (path) em qualquer profundidade.",
   "type": "module",
   "scripts": {

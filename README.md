@@ -27,15 +27,8 @@ Os pais colapsados de um resultado são expandidos automaticamente.
 
 ## Temas
 
-O visual segue as paletas oficiais do IntelliJ IDEA. O botão "Tema" na barra
-alterna entre:
-
-- **Darcula** (escuro, padrão) — fundo `#2B2B2B`, chaves em laranja `#CC7832`,
-  strings em verde `#6A8759`, números em azul `#6897BB`.
-- **IntelliJ Light** (claro) — fundo `#FFFFFF`, chaves em azul `#0033B3`,
-  strings em verde `#067D17`, números em `#1750EB`.
-
-A escolha é persistida em `localStorage`.
+A barra tem um seletor com vários temas claros e escuros, inspirados em paletas
+comuns de IDEs e editores. A escolha é persistida em `localStorage`.
 
 ## Estrutura
 
